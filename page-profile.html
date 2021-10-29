@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Personalized Enrichment</title>
+    <base target="_top">
+  </head>
+  <?!= include("page-css"); ?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <body background="https://img.wallpapersafari.com/desktop/1920/1080/92/49/Eu58yt.png" link="#ffd600">
+
+    <h3 align="right">
+      <font class="blue lighten-5" face="cinzel" color="#ffd600" size="5">
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev?v=home">HOME</a>&nbsp;
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev?v=profile">PROFILE</a>&nbsp;
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev?v=survey">SURVEYS</a>&nbsp;
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev?v=sug">SUGGESTIONS</a>&nbsp;
+      </font>
+    </h3>
+
+    <h3 class="bottomLeft">
+      <font class="blue lighten-5" face="cinzel" size="5"> 
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev">LOG OUT</a>
+      </font>
+    </h3>
+
+    <div id="display1" class="middle">
+      <div class="row">
+        <div class="input-field col s7">
+          <input id="ID" type="text" class="validate">
+          <label for="name" class="activate">Enter your ID:</label>
+        </div>
+        <div class="input-field col s7">
+          <button id="butn" class="waves-effect waves-light btn-large yellow accent-4"><i class="material-icons left">fingerprint</i>Display my Profile</button>
+        </div>
+      </div>
+      
+      <div>
+        <font face="Lato" color="#000" size="3">
+          To get your account ID click the "Get my ID" button found on the home page.
+        </font>
+      </div>
+    </div>
+
+    <div id="display2" class="display2_css">
+      <div class="middle">
+        <table class="striped" border="10" bgcolor="#ffd600">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Math</td>
+              <td id="math">N/A</td>
+            </tr>
+            <tr>
+              <td>English</td>
+              <td id="english">N/A</td>
+            </tr>
+            <tr>
+              <td>Science</td>
+              <td id="science">N/A</td>
+            </tr>
+            <tr>
+              <td>History</td>
+              <td id="history">N/A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="display2_topMiddle">
+        <div class="input-field col s3">
+          <input id="name" type="text" class="validate">
+          <label for="name" class="activate">Name</label>
+        </div>
+      </div>
+
+      <div class="display2_topLeft">
+        <div class="input-field col s3">
+          <input id="style" type="text" class="validate">
+          <label for="style" class="activate">Learning Style</label>
+        </div>
+        <div class="input-field col s3">
+          <input id="subject" type="text" class="validate">
+          <label for="subject" class="activate">Favorite Subject</label>
+        </div>
+        <div class="input-field col s3">
+          <input id="job" type="text" class="validate">
+          <label for="job" class="activate">Dream Job</label>
+        </div>
+      </div>
+
+    </div>
+  </body>
+  <script>
+
+    document.getElementById("butn").addEventListener("click", displayProfile);
+    function displayProfile()
+    {
+      document.getElementById("display1").style.display = "none";
+      document.getElementById("display2").style.display = "flex";
+
+      var userID = document.getElementById("ID").value;
+
+      google.script.run.withSuccessHandler(updateData).getProfileData(userID);
+      google.script.run.withSuccessHandler(updateGrades).getGrades(userID);
+    }
+
+    function updateData(profileData)
+    {
+      document.getElementById("name").value = profileData[0];    
+      document.getElementById("style").value = profileData[1];    
+      document.getElementById("subject").value = profileData[2];
+      document.getElementById("job").value = profileData[3];
+      M.updateTextFields();
+    }
+
+    function updateGrades(grades)
+    {
+      document.getElementById("math").innerHTML = grades[0];    
+      document.getElementById("english").innerHTML = grades[1];    
+      document.getElementById("science").innerHTML = grades[2];
+      document.getElementById("history").innerHTML = grades[3];
+    }
+    
+
+   </script>
+</html>

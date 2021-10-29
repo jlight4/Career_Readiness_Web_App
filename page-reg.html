@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <h1>Register</h1>
+
+      <div class="row">
+        <div class="input-field col s3">
+          <input id="user" type="text" class="validate">
+          <label for="user">Username</label>
+        </div>
+        <div class="input-field col s3">
+          <input id="pass" type="text" class="validate">
+          <label for="pass">Password</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="butn" class="waves-effect waves-light btn-large green accent-3"><i class="material-icons left">add</i>Register</button>
+        <span id="Message" style="color: green" ></span>
+      </div>
+
+      <div class="row">
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev" id="butn2" class="waves-effect waves-light btn grey darken-4"><i 
+           class="material-icons right">arrow_back</i>Return to Login</a>
+      </div>
+
+    </div> 
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
+   <script>
+
+    document.getElementById("butn").addEventListener("click", addData);
+    function addData()
+    {
+      var userInfo={}
+      userInfo.username = document.getElementById("user").value;
+      userInfo.passcode = document.getElementById("pass").value;
+      google.script.run.userClickedReg(userInfo);
+      document.getElementById("user").value='';
+      document.getElementById("pass").value='';
+      document.getElementById("Message").innerHTML = "Registration was successful!";
+    }
+
+   </script>
+  </body>
+</html>

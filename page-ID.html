@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <?!= include("page-css"); ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      function UserClickedID()
+      {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      google.script.run.withSuccessHandler(updateDisplay).findID(username, password);
+
+      document.getElementById("Message").innerHTML = "Please copy and save this ID to complete surveys."
+      }
+
+      function updateDisplay(userID)
+      {
+        document.getElementById("displayID").value = userID;
+        M.updateTextFields();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Enter Credentials</h1>
+
+      <div class="row">
+        <div class="input-field col s3">
+          <input id="username" type="text" class="validate">
+          <label for="username">Username</label>
+        </div>
+
+        <div class="input-field col s3">
+          <input id="password" type="password" class="validate">
+          <label for="password">Passcode</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s2">
+          <button onclick="UserClickedID()" class="waves-effect waves-light btn-large light-blue accent-4"><i class="material-icons right">arrow_forward</i>Show my ID</button>
+        </div>
+        <div class="input-field col s3">
+          <input disabled id="displayID" type="text" class="validate">
+          <label for="dis" class="activate">Your ID is: </label>
+        </div>
+      </div>
+      <span id="Message" style="color: green" ></span>
+    </div>
+
+    <div class="bottomLeft">
+        <a href="https://script.google.com/macros/s/AKfycbwn9vh5Xp9fZoDXDYxY5EieMMadPr9P7GcRZD7qu14/dev?v=survey" id="butn2" class="waves-effect waves-light btn grey darken-4"><i 
+          class="material-icons   left">arrow_back</i>Return to Survey</a>
+    </div>
+  </body>
+</html>
